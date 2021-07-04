@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <title>Weather App</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+        body {
+            font-family: 'Poppins';
+        }
+
+        .bgcol {
+            background-color: #4d4dff;
+            color: white;
+        }
+
+        .im {
+            width: 100%;
+            height: 80vh;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Style the search field */
+        form.example input[type=text] {
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid grey;
+            float: left;
+            width: 80%;
+            background: #fff;
+        }
+
+        form.example input[type=text]:hover {
+            border: 1px solid #4d4dff;
+        }
+
+        /* Style the submit button */
+        form.example button {
+            float: left;
+            width: 20%;
+            padding: 10px;
+            background: #4d4dff;
+            color: white;
+            font-size: 17px;
+            border: 1px solid grey;
+            border-left: none;
+            /* Prevent double borders */
+            cursor: pointer;
+        }
+
+        form.example button:hover {
+            background: #033879;
+        }
+
+        /* Clear floats */
+        form.example::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand px-4 my-2" href="">Weather App</a>
+        <div class="px-1">
+            <a href="https://www.instagram.com/yashparmar_1511/" target="_blank">
+                <button class="btn my-2 my-sm-0 bgcol" type="submit">Created by Yash Parmar</button></a>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <form class="example" action="" method="POST">
+            {% csrf_token %}
+            <input type="text" placeholder="Enter your city.." name="city">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        </form>
+
+    </div>
+    <div class="container my-3">
+        {% if country_code and coordinate and temp and pressure and humidity %}
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h4 class="text-center">{{city}}</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <figure class="image is-50x50">
+                        <img src="http://openweathermap.org/img/w/{{ weather_icon }}.png" alt="Image"
+                            style="color:white">
+                    </figure>
+                    <div class="col-md-6">
+                        <h5>Country: {{country_code}}</h5>
+                        <h5>Sunrise: {{sunrise}}</h5>
+                        <h5>Sunset: {{sunset}}</h5>
+                        <h5>visibility: {{visibility}}</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Temprature: {{temp}}</h5>
+                        <h5>Pressure: {{pressure}}</h5>
+                        <h5>Humididy: {{humidity}}</h5>
+                        <h5>Description: {{description}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
